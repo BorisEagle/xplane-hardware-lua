@@ -1,18 +1,18 @@
 -- WINCTRL 3N PDC L MINS acceleration for the Zibo 737-800
--- Version 1.0.0
+-- Version 1.0.1
 -- Copyright (c) 2026 Borys Nechypor
 -- SPDX-License-Identifier: MIT
 --
--- SimAppPro supplies normal fine movement while the MINS direction button is
--- held. This script adds deterministic acceleration to the captain-side MINS:
---
---   short hold       = SimAppPro fine movement only
---   medium hold      = extra 10 ft steps
---   long hold        = extra 100 ft steps
+-- Self-contained captain-side MINS control; SimAppPro is not required.
+--   press            = one immediate 1 ft step
+--   hold < 0.30 s    = no additional movement
+--   hold >= 0.30 s   = 10 ft steps every 0.18 s
+--   hold >= 1.50 s   = 100 ft steps every 0.20 s
 --
 -- Assign the PDC L MINS direction buttons (40 and 42) to the matching
--- PDC_L/EFIS/MINS_*_ACCEL commands created below. Keep the original automatic
--- SimAppPro mapping enabled because it supplies the initial fine movement.
+-- PDC_L/EFIS/MINS_*_ACCEL commands below. Use only one MINS handler:
+-- the Linux WINCTRL plugin defers to X-Plane-assigned buttons.
+-- Disable any parallel SimAppPro MINS mapping if using this on Windows.
 
 dataref("WINCTRL_TIME", "sim/time/total_running_time_sec")
 
@@ -38,6 +38,10 @@ function winctrl_mins_begin(direction)
     mins_slew.press_time = WINCTRL_TIME
     mins_slew.last_extra = WINCTRL_TIME
     mins_slew.active_dir = direction
+
+    -- Supply the initial one-foot step previously provided by SimAppPro.
+    local value = get(mins_slew.value_ref)
+    set(mins_slew.value_ref, value + direction)
 end
 
 
@@ -49,7 +53,7 @@ function winctrl_mins_update(direction)
     local now = WINCTRL_TIME
     local held_for = now - mins_slew.press_time
 
-    -- Short presses stay fully granular and belong solely to SimAppPro.
+    -- The initial one-foot step is enough until acceleration begins.
     if held_for < mins_slew.medium_after then
         return
     end

@@ -7,6 +7,16 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-09-09
+
+### Fixed
+
+- Apply an immediate one-foot MINS step on each direction press, restoring
+  fine adjustment without SimAppPro when X-Plane assigns the buttons to Lua.
+- Preserve the existing 10 ft / 100 ft acceleration stages and immediate stop
+  on release.
+- Update setup instructions to prevent parallel SimAppPro MINS input.
+
 ## [1.0.0] - 2026-08-12
 
 ### Added
