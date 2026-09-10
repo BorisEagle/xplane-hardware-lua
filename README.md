@@ -5,6 +5,25 @@ X-Plane 12. The scripts target the Zibo 737-800 and supported cockpit hardware.
 
 ## Available scripts
 
+### TCA Boeing four-lever throttle averaging
+
+[`scripts/thrustmaster/tca_throttle_average_zibo.lua`](scripts/thrustmaster/tca_throttle_average_zibo.lua)
+replaces the old Joystick Gremlin and vJoy setup. It combines four physical TCA
+Boeing thrust levers into the Zibo's two engine throttle axes:
+
+| X-Plane assignment | Result |
+| --- | --- |
+| `Throttle 1` + `Throttle 2` | Average sent to Zibo engine 1 |
+| `Throttle 3` + `Throttle 4` | Average sent to Zibo engine 2 |
+
+Assign the two levers on TCA Quadrant Boeing 1&2 to `Throttle 1` and
+`Throttle 2`. Assign the two levers on TCA Quadrant Boeing 3&4 to `Throttle 3`
+and `Throttle 4`. The script releases the Zibo throttle override if any of the
+four assignments is unavailable, and also releases it when FlyWithLua exits.
+
+For the complete device-by-device migration procedure, use the
+[`Zibo 737 Linux hardware setup checklist`](docs/zibo-linux-manual-setup.md).
+
 ### WINCTRL 3N PDC L MINS acceleration
 
 [`scripts/winwing/winctrl_pdc_l_mins.lua`](scripts/winwing/winctrl_pdc_l_mins.lua)
@@ -48,6 +67,10 @@ script selects Off once when both buttons are released.
    ```
 
 3. Start X-Plane 12 and load the Zibo 737-800.
+
+For the throttle-averaging script, set Zibo EFB option
+**A/T ENGAGED LOCK THROTTLE** to **ON** and follow the four axis assignments
+above. Joystick Gremlin and vJoy are not required on Linux.
 
 ## WINCTRL 3N PDC L configuration
 

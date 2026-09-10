@@ -11,6 +11,10 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Add Saitek AV8R-01 OFF/A/B switch integration for the Zibo position lights,
   using direct Steady and Strobe assignments plus scripted OFF detection.
+- Add Linux-native TCA Boeing four-lever throttle averaging for the Zibo
+  737-800, replacing the previous Joystick Gremlin and vJoy chain.
+- Add a manual Linux migration checklist for the eight active cockpit devices
+  from the old X-Plane control profile.
 
 ## [1.0.1] - 2026-09-09
 
