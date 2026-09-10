@@ -1,8 +1,7 @@
 # X-Plane Hardware Lua
 
 FlyWithLua scripts that improve physical cockpit hardware integration in
-X-Plane 12. The initial script targets the WINWING WINCTRL 3N PDC L and the
-Zibo 737-800.
+X-Plane 12. The scripts target the Zibo 737-800 and supported cockpit hardware.
 
 ## Available scripts
 
@@ -25,17 +24,23 @@ Movement stops immediately when the knob is released. The script writes exact
 increments to Zibo's captain MINS dataref, avoiding oversized or
 frame-rate-dependent jumps from the native FAST command.
 
+### Saitek AV8R-01 position lights
+
+[`scripts/saitek/av8r_zibo_position_lights.lua`](scripts/saitek/av8r_zibo_position_lights.lua)
+maps the joystick's maintained OFF/A/B switch to the Zibo position-light
+switch. Buttons 12 and 13 continue to select Steady and Strobe directly; the
+script selects Off once when both buttons are released.
+
 ## Requirements
 
 - X-Plane 12
 - Zibo 737-800
 - FlyWithLua NG
-- WINWING WINCTRL 3N PDC L
+- Supported hardware for the selected script
 
 ## Installation
 
-1. Download
-   [`winctrl_pdc_l_mins.lua`](scripts/winwing/winctrl_pdc_l_mins.lua).
+1. Download the required `.lua` file from the [`scripts`](scripts) directory.
 2. Copy it to:
 
    ```text
@@ -44,7 +49,7 @@ frame-rate-dependent jumps from the native FAST command.
 
 3. Start X-Plane 12 and load the Zibo 737-800.
 
-## Configuration
+## WINCTRL 3N PDC L configuration
 
 SimAppPro is not required. Keep the Linux WINCTRL plugin installed for the
 other panel functions.
@@ -66,7 +71,22 @@ movement.
 This fix retains the existing direct-dataref behaviour; it does not implement
 the plugin's recovery of the last MINS value after RST/unset.
 
-## Tuning
+## Saitek AV8R-01 configuration
+
+In X-Plane's joystick settings, keep the maintained switch buttons assigned
+directly to the Zibo commands:
+
+| Physical position | Button state | X-Plane command |
+| --- | --- | --- |
+| OFF | Neither pressed | Supplied by the Lua script |
+| A | Button 12 pressed | Position Light Switch Steady |
+| B | Button 13 pressed | Position Light Switch Strobe |
+
+The script sends `laminar/B738/toggle_switch/position_light_off` once when the
+switch enters OFF. If FlyWithLua reports different global button numbers,
+change `STEADY_BUTTON` and `STROBE_BUTTON` near the top of the script.
+
+## WINCTRL tuning
 
 Acceleration timing and step sizes are defined near the top of the script:
 
@@ -89,4 +109,3 @@ kept for Thrustmaster Boeing TCA integration and upstream compatibility.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-

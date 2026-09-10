@@ -7,6 +7,11 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Added
+
+- Add Saitek AV8R-01 OFF/A/B switch integration for the Zibo position lights,
+  using direct Steady and Strobe assignments plus scripted OFF detection.
+
 ## [1.0.1] - 2026-09-09
 
 ### Fixed
