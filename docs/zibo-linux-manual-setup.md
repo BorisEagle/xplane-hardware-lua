@@ -58,11 +58,16 @@ assignments exactly:
 | TCA Quadrant Boeing 3&4 | Right thrust lever | `Throttle 4` |
 
 The script sends `(Throttle 1 + Throttle 2) / 2` to Zibo engine 1 and
-`(Throttle 3 + Throttle 4) / 2` to Zibo engine 2. All four assignments must be
-present; if one disappears, the script releases the Zibo throttle override.
+`(Throttle 3 + Throttle 4) / 2` to Zibo engine 2. It discovers the physical
+axis slots from these four X-Plane assignments instead of relying on mapped
+engine availability, which only reliably exposes engines 1 and 2 on the Zibo.
+X-Plane's **Reverse** checkbox is applied to each lever. All four assignments
+must be present; if one disappears, the script releases the Zibo throttle
+override and periodically looks for the assignment again.
 
 - [ ] Set the Zibo EFB option **A/T ENGAGED LOCK THROTTLE** to **ON**.
-- [ ] Leave the TCA thrust-lever response curves linear at first.
+- [ ] Keep all four TCA thrust-lever response curves linear. The script reads
+      physical axis values, so X-Plane custom response curves are not applied.
 - [ ] Do not assign any of the four levers to `Throttle`, `Throttle 1` twice,
       or a Zibo throttle command.
 - [ ] Do not create a vJoy device and do not run Joystick Gremlin on Linux.

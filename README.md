@@ -18,8 +18,12 @@ Boeing thrust levers into the Zibo's two engine throttle axes:
 
 Assign the two levers on TCA Quadrant Boeing 1&2 to `Throttle 1` and
 `Throttle 2`. Assign the two levers on TCA Quadrant Boeing 3&4 to `Throttle 3`
-and `Throttle 4`. The script releases the Zibo throttle override if any of the
-four assignments is unavailable, and also releases it when FlyWithLua exits.
+and `Throttle 4`. The script finds the physical axes carrying those assignments
+and averages their values directly, matching the input stage of the old
+Joystick Gremlin/vJoy setup. X-Plane's per-axis **Reverse** setting is honored;
+the four response curves must remain linear. The script periodically discovers
+late or changed assignments, releases the Zibo throttle override if any input
+is missing or invalid, and also releases it when FlyWithLua exits.
 
 For the complete device-by-device migration procedure, use the
 [`Zibo 737 Linux hardware setup checklist`](docs/zibo-linux-manual-setup.md).

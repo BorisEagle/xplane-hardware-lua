@@ -7,6 +7,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+### Fixed
+
+- Read the four TCA throttle levers from their physical X-Plane axis slots so
+  Throttle 3 and 4 participate in averaging on the two-engine Zibo 737.
+- Honor X-Plane's per-axis reverse setting, rediscover assignments changed
+  after script load, and bound discovery to X-Plane's 500 physical-axis slots.
+
 ### Added
 
 - Add Saitek AV8R-01 OFF/A/B switch integration for the Zibo position lights,
